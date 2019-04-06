@@ -9,7 +9,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 //home page url
-$home_url="http://localhost/php-rest-api/";
+$home_url="http://localhost/test_mencatatKehadiran/";
 
 //page given in url parameter, default page is one
 $page = isset($_GET['page']) ? $_GET['page'] : 1;

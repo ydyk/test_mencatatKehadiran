@@ -19,7 +19,16 @@ $attendances = new Attendances($db);
 
 //Get post data
 $data = json_decode(file_get_contents("php://input"));
+// echo '<pre>'; print_r($data); echo '</pre>';
 
+if(empty($data->id_class)){
+    echo '{';
+        echo '"message": "Unable to create Attendances, please fill id_class"';
+    echo '}';
+    return;
+}
+else
+{
 //set product values
 $attendances->id            = md5($data->id);
 $attendances->id_class      = $data->id_class;
@@ -37,4 +46,5 @@ if($attendances->create()){
     echo '{';
         echo '"message": "Unable to create Attendances."';
     echo '}';
+}
 }

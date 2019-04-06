@@ -62,9 +62,13 @@ if($num>0){
     }
     // echo json_encode($categories_arr);
 }else{
-    echo json_encode(
-        array("message" => "No attendaces found.")
+    // echo json_encode(
+    //     array("message" => "No attendaces found.")
+    // );
+    $no_attendances=array(
+        "message" => "No attendaces found."
     );
+    array_push($attendaces_arr["attendances"], $no_attendances);
 }
 //attendent
 //==============================================
@@ -87,18 +91,18 @@ else{
     return;
 }
 //query cats
-$stmt = $classes->readAll($sql_id);
-$num = $stmt->rowCount();
+$stmtclass = $classes->readAll($sql_id);
+$numclass = $stmtclass->rowCount();
 
 
-if($num>0){
+if($numclass>0){
 
 
     $categories_arr=array();
     // $categories_arr["class"]=array();
 
     //retrieve tables
-    while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
+    while($row=$stmtclass->fetch(PDO::FETCH_ASSOC)){
 
         extract($row);
 
