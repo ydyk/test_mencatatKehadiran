@@ -95,7 +95,7 @@ if($num>0){
 
 
     $categories_arr=array();
-    $categories_arr["class"]=array();
+    // $categories_arr["class"]=array();
 
     //retrieve tables
     while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
@@ -110,11 +110,15 @@ if($num>0){
             "created_at" => $created_at,
             "updated_at" => $updated_at,
         );
-        
-        array_push($categories_arr["class"], array_merge($classes, $attendaces_arr));
+        $categories_arr['class'] = array_merge($classes, $attendaces_arr);
+        $arrDB = array();
+        $arrDB['success'] = 'true';
+        $arrDB['message'] = ['OK'];
+        $arrData = array();
+        $arrData['data'] = $categories_arr;
     }
 
-    echo json_encode($categories_arr);
+    echo json_encode(array_merge($arrDB, $arrData));
 }else{
     echo json_encode(
         array("message" => "No attendaces found.")

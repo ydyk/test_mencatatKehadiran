@@ -34,9 +34,7 @@ $num = $stmt->rowCount();
 if($num>0){
 
     $classes_arr=array();
-    $classes_arr["data"]=array();
-
-    //retrieve tables
+    $classes_arr["classes"]=array();
     while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
 
         extract($row);
@@ -50,10 +48,15 @@ if($num>0){
             "updated_at" => $updated_at
         );
 
-        array_push($classes_arr["data"], $class_item);
+        array_push($classes_arr["classes"], $class_item);
+        $arrDB = array();
+        $arrDB['success'] = 'true';
+        $arrDB['message'] = ['OK'];
+        $arrData = array();
+        $arrData['data'] = $classes_arr;
     }
 
-    echo json_encode($classes_arr);
+    echo json_encode(array_merge($arrDB, $arrData));
 }else{
     echo json_encode(
         array("message" => "No classes found.")
